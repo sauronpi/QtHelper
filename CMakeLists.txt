@@ -8,8 +8,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt6 REQUIRED COMPONENTS Quick)
 find_package(Qt6 REQUIRED COMPONENTS Core)
-find_package(Qt6 REQUIRED COMPONENTS Core)
-find_package(Qt6 REQUIRED COMPONENTS Core)
 
 qt_standard_project_setup(REQUIRES 6.8)
 
@@ -20,10 +18,7 @@ qt_add_executable(appQtHelper
 qt_add_qml_module(appQtHelper
     URI QtHelper
     VERSION 1.0
-    QML_FILES
-        Main.qml
-        QML_FILES
-        QML_FILES
+    QML_FILES Main.qml
         QML_FILES Model/HomeModel.qml
         QML_FILES View/HomeView.qml
         QML_FILES View/ListView.qml
@@ -31,31 +26,29 @@ qt_add_qml_module(appQtHelper
         QML_FILES View/Button.qml
         SOURCES Model/MyTestModel.h Model/MyTestModel.cpp
         QML_FILES View/MyTestView.qml
-        SOURCES
-        SOURCES
-        SOURCES
         QML_FILES View/TextEdit.qml
         SOURCES Model/LogHandler.h Model/LogHandler.cpp
-        QML_FILES
-        SOURCES
-        SOURCES
-        QML_FILES
         SOURCES Model/DisplayMonitorInfo.h Model/DisplayMonitorInfo.cpp
+        SOURCES Model/MonitorControl.h Model/MonitorControl.cpp
+        QML_FILES View/MonitorControlView.qml
 )
 
-# 添加 WinRT 支持
 if(WIN32)
-    # 手动指定路径（替换为你的实际路径）
+    # 添加 WinRT 支持
     set(WINRT_INCLUDE_DIR "$ENV{WINDOWS_SDK_DIR}/Include/$ENV{WINDOWS_SDK_VERSION}/cppwinrt")
+
     if(EXISTS ${WINRT_INCLUDE_DIR})
         target_include_directories(appQtHelper PRIVATE ${WINRT_INCLUDE_DIR})
     else()
         message(FATAL_ERROR "WinRT headers not found at ${WINRT_INCLUDE_DIR}")
     endif()
     target_link_libraries(appQtHelper PRIVATE
-        -lruntimeobject
+        # -lruntimeobject
         -lwindowsapp
     )
+    #include <physicalmonitorenumerationapi.h>
+    #include <lowlevelmonitorconfigurationapi.h>
+    target_link_libraries(appQtHelper PRIVATE dxva2)
 endif()
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
@@ -69,12 +62,9 @@ set_target_properties(appQtHelper PROPERTIES
     WIN32_EXECUTABLE TRUE
 )
 
-target_link_libraries(appQtHelper
-    PRIVATE Qt6::Quick
-)
+target_link_libraries(appQtHelper PRIVATE Qt6::Quick)
 target_link_libraries(appQtHelper PRIVATE Qt6::Core)
-target_link_libraries(appQtHelper PRIVATE Qt6::Core)
-target_link_libraries(appQtHelper PRIVATE Qt6::Core)
+
 include(GNUInstallDirs)
 install(TARGETS appQtHelper
     BUNDLE DESTINATION .
