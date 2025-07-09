@@ -8,7 +8,7 @@ Item {
     // 定义页面路径的组件
     Component.onCompleted: {
         listModel.append({name: "MyTest", page: "MyTestView.qml"})
-        listModel.append({name: "MonitorInfo", page: "MonitorInfo.qml"})
+        listModel.append({name: "DisplayMonitorInfo", page: "DisplayMonitorInfoView.qml"})
         listModel.append({name: "MonitorControl", page: "MonitorControlView.qml"})
         listModel.append({name: "Button", page: "Button.qml"})
         listModel.append({name: "ListView", page: "ListView.qml"})

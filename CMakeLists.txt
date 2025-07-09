@@ -31,6 +31,7 @@ qt_add_qml_module(appQtHelper
         SOURCES Model/DisplayMonitorInfo.h Model/DisplayMonitorInfo.cpp
         SOURCES Model/MonitorControl.h Model/MonitorControl.cpp
         QML_FILES View/MonitorControlView.qml
+        QML_FILES View/DisplayMonitorInfoView.qml
 )
 
 if(WIN32)

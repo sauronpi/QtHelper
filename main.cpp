@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
         []() { QCoreApplication::exit(-1); },
         Qt::QueuedConnection);
     qmlRegisterType<MyTestModel>("QtHelper.MyTestModel", 1, 0, "MyTestModel");
-    qmlRegisterType<DisplayMonitorInfo>("QtHelper.MyTestModel", 1, 0, "DisplayMonitorInfo");
+    qmlRegisterType<DisplayMonitorInfo>("QtHelper.DisplayMonitorInfo", 1, 0, "DisplayMonitorInfo");
     qmlRegisterType<MonitorControl>("QtHelper.MonitorControl", 1, 0, "MonitorControl");
     engine.loadFromModule("QtHelper", "Main");
     // 清理 WinRT
